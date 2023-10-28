@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="1st">
+        <h2>Temperature Converter</h2>
+        <input type="number" id="inputTemp" placeholder="Enter temperature" required>
+        <p><b>Select Input Unit:</b></p>
+        <input type="radio" name="inputUnit" value="Celsius" id="celsius"> <label for="celsius">Celsius</label>
+        <input type="radio" name="inputUnit" value="Fahrenheit" id="fahrenheit"> <label for="fahrenheit">Fahrenheit</label>
+        <input type="radio" name="inputUnit" value="Kelvin" id="kelvin"> <label for="kelvin">Kelvin</label>
+        <p><b>Select Output Unit:</b></p>
+        <input type="radio" name="outputUnit" value="Celsius" id="celsiusOut"> <label for="celsiusOut">Celsius</label>
+        <input type="radio" name="outputUnit" value="Fahrenheit" id="fahrenheitOut"> <label for="fahrenheitOut">Fahrenheit</label>
+        <input type="radio" name="outputUnit" value="Kelvin" id="kelvinOut"> <label for="kelvinOut">Kelvin</label>
+        <button id="convertBtn">Convert</button>
+        <div id="result"></div>
+    </div>
+</body>
+<script>
+    document.getElementById("convertBtn").addEventListener("click", function () {
+        // Get user input and selected input and output units
+        const inputTemp = parseFloat(document.getElementById("inputTemp").value);
+        const inputUnit = document.querySelector('input[name="inputUnit"]:checked').value;
+        const outputUnit = document.querySelector('input[name="outputUnit"]:checked').value;
+
+        // Convert temperature based on the selected units
+        let convertedTemp;
+        if (inputUnit === "Celsius" && outputUnit === "Fahrenheit") {
+            convertedTemp = (inputTemp * 9/5) + 32;
+        } else if (inputUnit === "Fahrenheit" && outputUnit === "Celsius") {
+            convertedTemp = (inputTemp - 32) * (5/9);
+        } else if (inputUnit === "Celsius" && outputUnit === "Kelvin") {
+            convertedTemp = inputTemp + 273.15;
+        } else if (inputUnit === "Kelvin" && outputUnit === "Celsius") {
+            convertedTemp = inputTemp - 273.15;
+        } else if (inputUnit === "Fahrenheit" && outputUnit === "Kelvin") {
+            convertedTemp = (inputTemp - 32) * (5/9) + 273.15;
+        } else if (inputUnit === "Kelvin" && outputUnit === "Fahrenheit") {
+            convertedTemp = (inputTemp - 273.15) * 9/5 + 32;
+        } else {
+            // Default case: No conversion needed
+            convertedTemp = inputTemp;
+        }
+
+        // Display the result
+        document.getElementById("result").innerText = `Converted Temperature: ${convertedTemp} ${outputUnit}`;
+    });
+</script>
+</html>
+
+
+
+
+
+
